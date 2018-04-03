@@ -1,0 +1,6 @@
+episode: 0/100, score: 473, e: 1.0
+episode: 18/100, score: 480, e: 0.83
+episode: 22/100, score: 408, e: 0.8
+episode: 29/100, score: 455, e: 0.75
+episode: 32/100, score: 451, e: 0.72
+episode: 38/100, score: 413, e: 0.68

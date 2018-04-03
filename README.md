@@ -1,7 +1,5 @@
 # OpenAI-Neat
 
-Watch the original video [here](https://youtu.be/o1_SkiEAjmA)
-
 ## Gym Setup Guide
 
 ### Installation Guide
@@ -16,15 +14,15 @@ pip install scipy neat-python==0.8 argparse
 
 ### Running the Program
 
-There are two files used to solve the gym environment: `gym_config` and `gym_solver.py`. `gym_config` contains the config for the neuroevolution process and `gym_solver.py` is the program the creates the neural networks and solves the game. You will need to adjust parameters in both to solve a game. 
+There are two files used to solve the gym environment: `gym_config` and `gym_solver.py`. `gym_config` contains the config for the neuroevolution process and `gym_solver.py` is the program the creates the neural networks and solves the game. You will need to adjust parameters in both to solve a game.
 
-If you open the gym_solver.py file with an IDE like [pycharm](https://www.jetbrains.com/pycharm/), there will be a section at the top for user parameters. 
+If you open the gym_solver.py file with an IDE like [pycharm](https://www.jetbrains.com/pycharm/), there will be a section at the top for user parameters.
 
 ```python
 ### User Params ###
 
 # The name of the game to solve
-game_name = 'CartPole-v0'
+game_name = 'MsPacman-ram-v0'
 
 ### End User Params ###
 ```
@@ -50,12 +48,12 @@ To run the simulation, execute this command:
 ```shell
 python gym_solver.py --max-steps=1000 --episodes=10 --generations=50 --render
 ```
-This tells the program to run 50 generations with 10 episodes per species in the population and render the game while the algorithm is learning. 
+This tells the program to run 50 generations with 10 episodes per species in the population and render the game while the algorithm is learning.
 
 ### Editing Parameters
 If you want to change the game, you will need to edit a few parameters. As an example, let's say we want to play Pacman. In order to play Atari games, we must use the ram version. Currently only ram versions are compatible with my program. On the Atari [page](https://gym.openai.com/envs#atari), scroll down and find the name of the ram version of Pacman (`MsPacman-ram-v0`).
 
-Open the `gym_solver.py` file and edit the `game_name` parameter so that it is `'MsPacman-ram-v0'`. 
+Open the `gym_solver.py` file and edit the `game_name` parameter so that it is `'MsPacman-ram-v0'`.
 
 Next, you will need to edit the `gym_config` file. However, before you do that, you will need to run the `gym_solver.py` program once to find some useful information.
 
@@ -63,7 +61,7 @@ Next, you will need to edit the `gym_config` file. However, before you do that, 
 python gym_solver.py
 ```
 
-The program will fail to run, but that is okay. We need two values before we update the config. 
+The program will fail to run, but that is okay. We need two values before we update the config.
 There will be two lines at the start of our program output:
 
 ```
@@ -99,7 +97,7 @@ My program also gives you the ability to continue a simulation after it finishes
 ```
 python gym_solver.py --episodes=3 --generations=100 --num-cores=8 --max-steps=10000 --checkpoint=checkpoint
 ```
-to simulate another 100 generations. At the end of this simulation, another checkpoint file will be generated. 
+to simulate another 100 generations. At the end of this simulation, another checkpoint file will be generated.
 
 ## Universe Setup Guide
 
@@ -109,7 +107,7 @@ Then, make sure you follow the installation instructions for universe at this [l
 
 ### Running the Program
 
-There are two files that are used to solve universe environments: `universe_config` and `universe_solver.py`. 
+There are two files that are used to solve universe environments: `universe_config` and `universe_solver.py`.
 
 You can run the simulation with the same parameters as `gym_solver`
 
@@ -155,7 +153,7 @@ rules = [['ArrowLeft', 'ArrowRight'], ['ArrowUp', 'ArrowDown']]
 
 `action_sheet` holds all of the actions that can be taken in the game. A list of actions can be found [here](https://github.com/openai/universe/blob/master/universe/vncdriver/constants.py)
 
-`rules` is an array of rules which are basically actions that can't be taken at the same time during one step. For example, the left and right key in a racing game cannot be pressed at the same time. 
+`rules` is an array of rules which are basically actions that can't be taken at the same time during one step. For example, the left and right key in a racing game cannot be pressed at the same time.
 
 Adjust these paramters according to the game enviroment you choose.
 
@@ -165,10 +163,21 @@ output_nodes         = 3
 ```
 to be the length of the action sheet array.
 
-Also edit 
+Also edit
 ```
 max_fitness_threshold   = 6000
 ```
 to an appropriate target fitness score.
 
 *Note* - `universe_solver.py` creates a checkpoint file like `gym_solver.py`
+
+## Deep Q Algorithm
+
+To implement this algorithm we are using Keras and Open-AI Gym again. Keras is usnig Tensorflow as its backend so make use that that is also intalled.
+First go to the `DQN` directory.
+Now we just need to run the `deepqlearn.py` file.
+```shell
+python deepqlearner.py
+```
+
+We have used some default parameters for no. of episodes (100) and batchsize (128). These can be easilly changed inside the file.
